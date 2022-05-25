@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+using ProjetoPastelariaDoZe_2022.DAO;
 
 namespace ProjetoPastelaria
 {
     public partial class CadastroCliente : Form
     {
+
+        private readonly ClienteDAO dao;
         ///private int buttonVoltar_Click;
 
         public CadastroCliente()
@@ -42,6 +46,11 @@ namespace ProjetoPastelaria
 
             userControlCliente.buttonSalvar.Click += ButtonSalvar_Click;
             userControlCliente.buttonVoltar.Click += ButtonVoltar_Click;
+
+            string provider = ConfigurationManager.ConnectionStrings["BD"].ProviderName;
+            string strConnection = ConfigurationManager.ConnectionStrings["BD"].ConnectionString;
+
+            dao = new FuncionarioDAO(provider, strConnection);
 
         }
 
@@ -108,6 +117,35 @@ namespace ProjetoPastelaria
         private void Salvar_Click(object sender, EventArgs e)
         {
         
+        }
+
+        private void CadastroCliente_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Instância e Preenche o objeto com os dados da view
+            var Cliente = new Cliente
+            {
+                IdCliente = 0,
+                Nome = textBox5.Text,
+                Cpf = maskedTextBox1.Text,
+                Telefone = maskedTextBox2.Text,
+                Senha = textBox7.Text,
+                
+            };
+            try
+            {
+                // chama o método para inserir da camada model
+                dao.InserirDbProvider(Cliente);
+                MessageBox.Show("Dados inseridos com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

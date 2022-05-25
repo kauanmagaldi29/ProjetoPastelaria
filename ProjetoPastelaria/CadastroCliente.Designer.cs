@@ -51,6 +51,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -280,12 +281,23 @@
             this.panel6.Size = new System.Drawing.Size(63, 1);
             this.panel6.TabIndex = 45;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(620, 360);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 46;
+            this.button1.Text = "Cadastrar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // CadastroCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(789, 423);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
@@ -315,6 +327,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CadastroCliente";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CadastroCliente_FormClosing);
+            this.Load += new System.EventHandler(this.CadastroCliente_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CadastroCliente_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
@@ -346,5 +359,6 @@
         private Panel panel4;
         private Panel panel5;
         private Panel panel6;
+        private Button button1;
     }
 }
