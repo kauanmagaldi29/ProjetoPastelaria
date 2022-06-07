@@ -3,6 +3,8 @@ using System.Data.Common;
 using System.Data.SqlClient;
 namespace ProjetoPastelaria
 {
+
+
     internal static class Program
     {
         /// <summary>
@@ -34,6 +36,26 @@ namespace ProjetoPastelaria
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
             Application.Run(new Login());
+        }
+
+        public static void ValidaConexaoDB()
+        {
+            DbProviderFactory factory;
+            try
+            {
+                factory = DbProviderFactories.GetFactory(ConfigurationManager.ConnectionStrings["BD"].ProviderName);
+                using var conexao = factory.CreateConnection();
+                conexao!.ConnectionString = ConfigurationManager.ConnectionStrings["BD"].ConnectionString;
+                using var comando = factory.CreateCommand();
+                comando!.Connection = conexao;
+                conexao.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                new Config().ShowDialog();
+                ValidaConexaoDB();
+            }
         }
     }
 } 

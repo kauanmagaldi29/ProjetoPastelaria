@@ -44,7 +44,6 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.radioButtonCadFunAdm = new System.Windows.Forms.RadioButton();
             this.radioButtonCadFunBalcao = new System.Windows.Forms.RadioButton();
-            this.userControlFuncionario = new ProjetoPastelaria.UserControl();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -53,6 +52,9 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Voltar = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox2
@@ -212,15 +214,6 @@
             this.radioButtonCadFunBalcao.Text = "Balcão";
             this.radioButtonCadFunBalcao.UseVisualStyleBackColor = true;
             // 
-            // userControlFuncionario
-            // 
-            this.userControlFuncionario.Location = new System.Drawing.Point(31, 340);
-            this.userControlFuncionario.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.userControlFuncionario.Name = "userControlFuncionario";
-            this.userControlFuncionario.Size = new System.Drawing.Size(568, 61);
-            this.userControlFuncionario.TabIndex = 17;
-            this.userControlFuncionario.Load += new System.EventHandler(this.userControlFuncionario_Load);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
@@ -294,12 +287,34 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(807, -3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(410, 413);
+            this.dataGridView1.TabIndex = 23;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Voltar
+            // 
+            this.Voltar.Location = new System.Drawing.Point(72, 362);
+            this.Voltar.Name = "Voltar";
+            this.Voltar.Size = new System.Drawing.Size(75, 23);
+            this.Voltar.TabIndex = 24;
+            this.Voltar.Text = "Voltar";
+            this.Voltar.UseVisualStyleBackColor = true;
+            this.Voltar.Click += new System.EventHandler(this.Voltar_Click);
+            // 
             // CadastroFuncionario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(790, 404);
+            this.ClientSize = new System.Drawing.Size(1214, 404);
+            this.Controls.Add(this.Voltar);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
@@ -308,7 +323,6 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.userControlFuncionario);
             this.Controls.Add(this.radioButtonCadFunBalcao);
             this.Controls.Add(this.radioButtonCadFunAdm);
             this.Controls.Add(this.labelCadFunRsenha);
@@ -333,6 +347,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CadastroFuncionario_FormClosing);
             this.Load += new System.EventHandler(this.CadastroFuncionario_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CadastroFuncionario_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,7 +371,6 @@
         private TextBox textBox6;
         private RadioButton radioButtonCadFunAdm;
         private RadioButton radioButtonCadFunBalcao;
-        private UserControl userControlFuncionario;
         private Panel panel1;
         private Panel panel2;
         private Panel panel3;
@@ -365,5 +379,7 @@
         private Panel panel6;
         private Panel panel7;
         private Button button1;
+        private DataGridView dataGridView1;
+        private Button Voltar;
     }
 }

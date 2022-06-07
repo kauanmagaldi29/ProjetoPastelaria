@@ -25,12 +25,34 @@ namespace ProjetoPastelaria
             textBox1.Enter += new EventHandler(ClassFuncoes.CampoEventoEnter!);
             textBox2.Leave += new EventHandler(ClassFuncoes.CampoEventoLeave!);
             textBox2.Enter += new EventHandler(ClassFuncoes.CampoEventoEnter!);
+
+         
+            // busca os dados com nome BD
+            ConnectionStringSettings connectionStringSettings =
+            ConfigurationManager.ConnectionStrings["BD"];
+            // obtém o providerName e atualiza em tela
+            comboBoxProvider.Text = connectionStringSettings.ProviderName;
+            // obtém a connectionString e atualiza em tela
+            textBoxStringDeConexao.Text = connectionStringSettings.ConnectionString;
         }
+
 
 
         private void Button1_Click_1(object sender, EventArgs e)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //altera os valores de provider e da connectionStrings com nome BD
+            config.ConnectionStrings.ConnectionStrings["BD"].ProviderName = comboBoxProvider.Text;
+            config.ConnectionStrings.ConnectionStrings["BD"].ConnectionString = textBoxStringDeConexao.Text;
+            //salva as alterações
+            config.Save(ConfigurationSaveMode.Modified, true);
+            //recarrega os dados da seção especificada
+            ConfigurationManager.RefreshSection("connectionStrings");
+            //fecha a tela
+            Close();
+            //dispara msg para usuário
+            _ = MessageBox.Show("Dados alterados com sucesso!");
+
             config.AppSettings.Settings.Remove("IdiomaRegiao");
             config.AppSettings.Settings.Add("IdiomaRegiao", comboBoxLinguagem.Text);
             config.Save(ConfigurationSaveMode.Modified);

@@ -42,7 +42,6 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.labelCadCliFiado = new System.Windows.Forms.Label();
             this.labelCadCliDias = new System.Windows.Forms.Label();
-            this.userControlCliente = new ProjetoPastelaria.UserControl();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -52,7 +51,9 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelCadCliRSenha
@@ -196,15 +197,6 @@
             this.labelCadCliDias.TabIndex = 40;
             this.labelCadCliDias.Text = "Day";
             // 
-            // userControlCliente
-            // 
-            this.userControlCliente.Location = new System.Drawing.Point(14, 350);
-            this.userControlCliente.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.userControlCliente.Name = "userControlCliente";
-            this.userControlCliente.Size = new System.Drawing.Size(568, 61);
-            this.userControlCliente.TabIndex = 41;
-            this.userControlCliente.Load += new System.EventHandler(this.userControlCliente_Load);
-            // 
             // maskedTextBox1
             // 
             this.maskedTextBox1.BackColor = System.Drawing.SystemColors.HotTrack;
@@ -283,7 +275,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(620, 360);
+            this.button1.Location = new System.Drawing.Point(574, 375);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 46;
@@ -291,12 +283,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(862, -4);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(402, 430);
+            this.dataGridView1.TabIndex = 47;
+            // 
             // CadastroCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(789, 423);
+            this.ClientSize = new System.Drawing.Size(1260, 423);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
@@ -306,7 +308,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.maskedTextBox2);
             this.Controls.Add(this.maskedTextBox1);
-            this.Controls.Add(this.userControlCliente);
             this.Controls.Add(this.labelCadCliDias);
             this.Controls.Add(this.labelCadCliFiado);
             this.Controls.Add(this.comboBox1);
@@ -330,6 +331,7 @@
             this.Load += new System.EventHandler(this.CadastroCliente_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CadastroCliente_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,7 +352,6 @@
         private ComboBox comboBox1;
         private Label labelCadCliFiado;
         private Label labelCadCliDias;
-        private UserControl userControlCliente;
         private MaskedTextBox maskedTextBox1;
         private MaskedTextBox maskedTextBox2;
         private Panel panel1;
@@ -360,5 +361,6 @@
         private Panel panel5;
         private Panel panel6;
         private Button button1;
+        private DataGridView dataGridView1;
     }
 }

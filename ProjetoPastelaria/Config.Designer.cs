@@ -39,53 +39,52 @@
             this.checkBoxAlteraIdioma = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.comboBoxProvider = new System.Windows.Forms.ComboBox();
+            this.textBoxStringDeConexao = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // labelConfigJuros
             // 
             this.labelConfigJuros.AutoSize = true;
-            this.labelConfigJuros.Location = new System.Drawing.Point(4, 74);
-            this.labelConfigJuros.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelConfigJuros.Location = new System.Drawing.Point(3, 44);
             this.labelConfigJuros.Name = "labelConfigJuros";
-            this.labelConfigJuros.Size = new System.Drawing.Size(113, 25);
+            this.labelConfigJuros.Size = new System.Drawing.Size(76, 15);
             this.labelConfigJuros.TabIndex = 36;
             this.labelConfigJuros.Text = "Percent juros";
             // 
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.textBox1.Location = new System.Drawing.Point(201, 68);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Location = new System.Drawing.Point(94, 36);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 31);
+            this.textBox1.Size = new System.Drawing.Size(141, 23);
             this.textBox1.TabIndex = 1;
             // 
             // labelConfigMulta
             // 
             this.labelConfigMulta.AutoSize = true;
-            this.labelConfigMulta.Location = new System.Drawing.Point(443, 74);
-            this.labelConfigMulta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelConfigMulta.Location = new System.Drawing.Point(310, 44);
             this.labelConfigMulta.Name = "labelConfigMulta";
-            this.labelConfigMulta.Size = new System.Drawing.Size(110, 25);
+            this.labelConfigMulta.Size = new System.Drawing.Size(72, 15);
             this.labelConfigMulta.TabIndex = 34;
             this.labelConfigMulta.Text = "Multa por at";
             // 
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.textBox2.Location = new System.Drawing.Point(635, 71);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.Location = new System.Drawing.Point(444, 36);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(383, 31);
+            this.textBox2.Size = new System.Drawing.Size(269, 23);
             this.textBox2.TabIndex = 2;
             // 
             // labelConfigLinguagem
             // 
             this.labelConfigLinguagem.AutoSize = true;
-            this.labelConfigLinguagem.Location = new System.Drawing.Point(515, 159);
-            this.labelConfigLinguagem.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelConfigLinguagem.Location = new System.Drawing.Point(360, 95);
             this.labelConfigLinguagem.Name = "labelConfigLinguagem";
-            this.labelConfigLinguagem.Size = new System.Drawing.Size(45, 25);
+            this.labelConfigLinguagem.Size = new System.Drawing.Size(30, 15);
             this.labelConfigLinguagem.TabIndex = 41;
             this.labelConfigLinguagem.Text = "Ling";
             // 
@@ -97,26 +96,26 @@
             "pt-BR",
             "en-US",
             "es"});
-            this.comboBoxLinguagem.Location = new System.Drawing.Point(635, 153);
-            this.comboBoxLinguagem.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxLinguagem.Location = new System.Drawing.Point(444, 92);
+            this.comboBoxLinguagem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxLinguagem.Name = "comboBoxLinguagem";
-            this.comboBoxLinguagem.Size = new System.Drawing.Size(188, 33);
+            this.comboBoxLinguagem.Size = new System.Drawing.Size(133, 23);
             this.comboBoxLinguagem.TabIndex = 3;
             // 
             // userControl1
             // 
-            this.userControl1.Location = new System.Drawing.Point(14, 221);
-            this.userControl1.Margin = new System.Windows.Forms.Padding(5);
+            this.userControl1.Location = new System.Drawing.Point(24, 189);
+            this.userControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.userControl1.Name = "userControl1";
-            this.userControl1.Size = new System.Drawing.Size(276, 81);
+            this.userControl1.Size = new System.Drawing.Size(193, 49);
             this.userControl1.TabIndex = 42;
             // 
             // buttonConfigSalvar
             // 
-            this.buttonConfigSalvar.Location = new System.Drawing.Point(840, 248);
-            this.buttonConfigSalvar.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonConfigSalvar.Location = new System.Drawing.Point(602, 205);
+            this.buttonConfigSalvar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonConfigSalvar.Name = "buttonConfigSalvar";
-            this.buttonConfigSalvar.Size = new System.Drawing.Size(118, 36);
+            this.buttonConfigSalvar.Size = new System.Drawing.Size(83, 22);
             this.buttonConfigSalvar.TabIndex = 43;
             this.buttonConfigSalvar.Text = "Salvar";
             this.buttonConfigSalvar.UseVisualStyleBackColor = true;
@@ -125,10 +124,10 @@
             // checkBoxAlteraIdioma
             // 
             this.checkBoxAlteraIdioma.AutoSize = true;
-            this.checkBoxAlteraIdioma.Location = new System.Drawing.Point(840, 155);
-            this.checkBoxAlteraIdioma.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxAlteraIdioma.Location = new System.Drawing.Point(588, 93);
+            this.checkBoxAlteraIdioma.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxAlteraIdioma.Name = "checkBoxAlteraIdioma";
-            this.checkBoxAlteraIdioma.Size = new System.Drawing.Size(184, 29);
+            this.checkBoxAlteraIdioma.Size = new System.Drawing.Size(123, 19);
             this.checkBoxAlteraIdioma.TabIndex = 4;
             this.checkBoxAlteraIdioma.Text = "Alterar ja o idioma";
             this.checkBoxAlteraIdioma.UseVisualStyleBackColor = true;
@@ -136,25 +135,44 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(638, 97);
+            this.panel1.Location = new System.Drawing.Point(447, 58);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(380, 2);
+            this.panel1.Size = new System.Drawing.Size(266, 1);
             this.panel1.TabIndex = 44;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Location = new System.Drawing.Point(201, 97);
+            this.panel2.Location = new System.Drawing.Point(94, 53);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 2);
+            this.panel2.Size = new System.Drawing.Size(140, 1);
             this.panel2.TabIndex = 45;
+            // 
+            // comboBoxProvider
+            // 
+            this.comboBoxProvider.FormattingEnabled = true;
+            this.comboBoxProvider.Location = new System.Drawing.Point(825, 30);
+            this.comboBoxProvider.Name = "comboBoxProvider";
+            this.comboBoxProvider.Size = new System.Drawing.Size(155, 23);
+            this.comboBoxProvider.TabIndex = 46;
+            // 
+            // textBoxStringDeConexao
+            // 
+            this.textBoxStringDeConexao.Location = new System.Drawing.Point(825, 91);
+            this.textBoxStringDeConexao.Name = "textBoxStringDeConexao";
+            this.textBoxStringDeConexao.Size = new System.Drawing.Size(100, 23);
+            this.textBoxStringDeConexao.TabIndex = 47;
             // 
             // Config
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(1079, 297);
+            this.ClientSize = new System.Drawing.Size(1155, 239);
+            this.Controls.Add(this.textBoxStringDeConexao);
+            this.Controls.Add(this.comboBoxProvider);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkBoxAlteraIdioma);
@@ -167,7 +185,7 @@
             this.Controls.Add(this.labelConfigMulta);
             this.Controls.Add(this.textBox2);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Config";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Config";
@@ -190,5 +208,7 @@
         private CheckBox checkBoxAlteraIdioma;
         private Panel panel1;
         private Panel panel2;
+        private ComboBox comboBoxProvider;
+        private TextBox textBoxStringDeConexao;
     }
 }

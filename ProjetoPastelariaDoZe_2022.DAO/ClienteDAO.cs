@@ -8,6 +8,7 @@ using System.Data.Common;
 
 namespace ProjetoPastelariaDoZe_2022.DAO
 {
+    using System.Data;
     using System.Data.Common;
    
     public class Cliente
@@ -72,6 +73,11 @@ namespace ProjetoPastelariaDoZe_2022.DAO
 
             throw new NotImplementedException();
 
+        }
+
+        public DataTable SelectDbProvider(Funcionario funcionario)
+        {
+            throw new NotImplementedException();
         }
     }
 }

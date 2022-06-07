@@ -44,13 +44,12 @@ namespace ProjetoPastelaria
             numericUpDown1.Enter += new EventHandler(ClassFuncoes.CampoEventoEnter!);
 
 
-            userControlCliente.buttonSalvar.Click += ButtonSalvar_Click;
-            userControlCliente.buttonVoltar.Click += ButtonVoltar_Click;
+            
 
             string provider = ConfigurationManager.ConnectionStrings["BD"].ProviderName;
             string strConnection = ConfigurationManager.ConnectionStrings["BD"].ConnectionString;
 
-            dao = new FuncionarioDAO(provider, strConnection);
+            dao = new ClienteDAO(provider, strConnection);
 
         }
 
@@ -88,6 +87,8 @@ namespace ProjetoPastelaria
             }
         }
 
+
+
         private void CadastroCliente_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -102,6 +103,32 @@ namespace ProjetoPastelaria
                     //
                 }
             }
+        }
+
+
+        private void AtualizarTela()
+        {
+            //Instância e Preenche o objeto com os dados da view
+            var funcionario = new Funcionario
+            {
+                IdFuncionario = 0,
+            };
+            try
+            {
+                //chama o método para buscar todos os dados da nossa camada model
+                DataTable linhas = dao.SelectDbProvider(funcionario);
+                // seta o datasouce do dataGridView com os dados retornados
+                dataGridView1.Columns.Clear();
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = linhas;
+                dataGridView1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            AtualizarTela();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,7 +160,7 @@ namespace ProjetoPastelaria
                 Nome = textBox5.Text,
                 Cpf = maskedTextBox1.Text,
                 Telefone = maskedTextBox2.Text,
-                Senha = textBox7.Text,
+                Senha = ClassFuncoes.Sha256Hash(textBox7.Text)
                 
             };
             try
@@ -145,7 +172,11 @@ namespace ProjetoPastelaria
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+
+
             }
+
+          
         }
     }
 }

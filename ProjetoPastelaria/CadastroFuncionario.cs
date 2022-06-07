@@ -42,8 +42,7 @@ namespace ProjetoPastelaria
             textBox7.Leave += new EventHandler(ClassFuncoes.CampoEventoLeave!);
             textBox7.Enter += new EventHandler(ClassFuncoes.CampoEventoEnter!);
 
-            userControlFuncionario.buttonVoltar.Click += ButtonVoltar_Click;
-            userControlFuncionario.buttonSalvar.Click += ButtonSalvar_Click;
+           
 
             // pega os dados do banco de dados
             string provider = ConfigurationManager.ConnectionStrings["BD"].ProviderName;
@@ -95,6 +94,10 @@ namespace ProjetoPastelaria
             }
         }
 
+
+      
+
+
         private void CadastroFuncionario_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -111,15 +114,14 @@ namespace ProjetoPastelaria
             }
         }
 
+
+
         private void CadastroFuncionario_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void userControlFuncionario_Load(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -130,7 +132,7 @@ namespace ProjetoPastelaria
                 Nome = textBox4.Text,
                 Cpf = textBox2.Text,
                 Telefone = textBox5.Text,
-                Senha = textBox6.Text,
+                Senha = ClassFuncoes.Sha256Hash(textBox6.Text),
                 Matricula = textBox3.Text,
                 Grupo = (radioButtonCadFunAdm.Checked) ? 1 : 2,
             };
@@ -144,6 +146,42 @@ namespace ProjetoPastelaria
             {
                 MessageBox.Show(ex.Message);
             }
+            AtualizarTela();
+        }
+
+        private void AtualizarTela()
+        {
+            //Instância e Preenche o objeto com os dados da view
+            var funcionario = new Funcionario
+            {
+                IdFuncionario = 0,
+            };
+            try
+            {
+                //chama o método para buscar todos os dados da nossa camada model
+                DataTable linhas = dao.SelectDbProvider(funcionario);
+                // seta o datasouce do dataGridView com os dados retornados
+                dataGridView1.Columns.Clear();
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = linhas;
+                dataGridView1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            AtualizarTela();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+         
+        }
+
+        private void Voltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
