@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjetoPastelariaDoZe_2022.DAO;
+using System.Configuration;
 
 namespace ProjetoPastelaria
 {
     public partial class CadastroProduto : Form
     {
+
+        private readonly ProdutoDAO dao;
+
         public CadastroProduto()
         {
             InitializeComponent();
@@ -31,8 +36,13 @@ namespace ProjetoPastelaria
             textBox5.Leave += new EventHandler(ClassFuncoes.CampoEventoLeave!);
             textBox5.Enter += new EventHandler(ClassFuncoes.CampoEventoEnter!);
 
-            userControlProduto.buttonSalvar.Click += ButtonSalvar_Click;
-            userControlProduto.buttonVoltar.Click += ButtonVoltar_Click;
+
+            // pega os dados do banco de dados
+            string provider = ConfigurationManager.ConnectionStrings["BD"].ProviderName;
+            string strConnection = ConfigurationManager.ConnectionStrings["BD"].ConnectionString;
+            // cria a instancia da classe da model
+
+            dao = new ProdutoDAO(provider, strConnection);
         }
 
         private void ButtonVoltar_Click(object? sender, EventArgs e)
@@ -101,6 +111,68 @@ namespace ProjetoPastelaria
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBoxImagem_Click(object sender, EventArgs e)
+        {
+            openFileDialogImagem.Title = "Imagem do produto";
+            openFileDialogImagem.Filter = "Images  (*.JPEG; *.BMP; *.JPG; *.GIF; *.PNG; *.)| *.JPEG; *.BMP; *.JPG; *.GIF; *.PNG; *.icon; *.JFIF";
+            if (openFileDialogImagem.ShowDialog() == DialogResult.OK)
+            {
+                //pega a imagem escolhida e adiciona na tela
+                pictureBoxImagem.Image = Image.FromFile(openFileDialogImagem.FileName);
+                //redimensiona a imagem
+                pictureBoxImagem.Image = (Image)(new Bitmap(pictureBoxImagem.Image, new Size(130, 98)));
+                //ajusta a visualização no tamanho do pictureBoxImagem na tela
+                pictureBoxImagem.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
+
+        private void openFileDialogImagem_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+       
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+                //Instância e Preenche o objeto com os dados da view
+                var produto = new Produto
+                {
+                    IdProduto = 0,
+                    Nome = textBox1.Text,
+                    Descricao = textBox3.Text,
+                    ValorUnitario = textBox2.Text,
+                    Foto = ClassFuncoes.ConverteImagemParaByteArray(pictureBoxImagem.Image),
+                };
+                try
+                {
+                    // chama o método para inserir da camada model
+                    dao.InserirDbProvider(produto);
+                    MessageBox.Show("Dados inseridos com sucesso!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            
+        }
+
+        private void pictureBoxImagem_Click_1(object sender, EventArgs e)
+        {
+            openFileDialogImagem.Title = "Imagem do produto";
+            openFileDialogImagem.Filter = "Images  (*.JPEG; *.BMP; *.JPG; *.GIF; *.PNG; *.)| *.JPEG; *.BMP; *.JPG; *.GIF; *.PNG; *.icon; *.JFIF";
+            if (openFileDialogImagem.ShowDialog() == DialogResult.OK)
+            {
+                //pega a imagem escolhida e adiciona na tela
+                pictureBoxImagem.Image = Image.FromFile(openFileDialogImagem.FileName);
+                //redimensiona a imagem
+                pictureBoxImagem.Image = (Image)(new Bitmap(pictureBoxImagem.Image, new Size(130, 98)));
+                //ajusta a visualização no tamanho do pictureBoxImagem na tela
+                pictureBoxImagem.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
     }
 }
