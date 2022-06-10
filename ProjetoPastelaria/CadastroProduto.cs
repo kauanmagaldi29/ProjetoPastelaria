@@ -1,14 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using System.Configuration;
+using System.Resources;
+using System.Globalization;
 using System.ComponentModel;
 using System.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjetoPastelariaDoZe_2022.DAO;
-using System.Configuration;
+using System.Threading.Tasks;
+using System.Data.Common;
 
 namespace ProjetoPastelaria
 {
@@ -21,18 +33,21 @@ namespace ProjetoPastelaria
         {
             InitializeComponent();
 
-            UserControl userControl = new();
-            userControl.Dock = DockStyle.Bottom;
+           
 
-            Size = new Size(Size.Width, Size.Height + userControl.Size.Height);
+           
 
             labelCadProdNome.Text = Properties.Resources.ResourceManager.GetString("LabelCadProdNome");
             labelCadProgDesc.Text = Properties.Resources.ResourceManager.GetString("LabelCadProdDesc");
             labelCadProValor.Text = Properties.Resources.ResourceManager.GetString("LabelCadProdValor");
+
+
             textBox1.Enter += new EventHandler(ClassFuncoes.CampoEventoEnter!);
             textBox1.Leave += new EventHandler(ClassFuncoes.CampoEventoLeave!);
+
             textBox3.Leave += new EventHandler(ClassFuncoes.CampoEventoLeave!);
             textBox3.Enter += new EventHandler(ClassFuncoes.CampoEventoEnter!);
+
             textBox5.Leave += new EventHandler(ClassFuncoes.CampoEventoLeave!);
             textBox5.Enter += new EventHandler(ClassFuncoes.CampoEventoEnter!);
 
@@ -43,6 +58,8 @@ namespace ProjetoPastelaria
             // cria a instancia da classe da model
 
             dao = new ProdutoDAO(provider, strConnection);
+
+
         }
 
         private void ButtonVoltar_Click(object? sender, EventArgs e)
@@ -157,7 +174,7 @@ namespace ProjetoPastelaria
                 {
                     MessageBox.Show(ex.Message);
                 }
-            
+            AtualizarTela();
         }
 
         private void pictureBoxImagem_Click_1(object sender, EventArgs e)
@@ -173,6 +190,140 @@ namespace ProjetoPastelaria
                 //ajusta a visualização no tamanho do pictureBoxImagem na tela
                 pictureBoxImagem.SizeMode = PictureBoxSizeMode.StretchImage;
             }
+        }
+
+        private void AtualizarTela()
+        {
+            //Instância e Preenche o objeto com os dados da view
+            var produto = new Produto
+            {
+                IdProduto = 0,
+            };
+            try
+            {
+                //chama o método para buscar todos os dados da nossa camada model
+                DataTable linhas = dao.SelectDbProvider(produto);
+                // seta o datasouce do dataGridView com os dados retornados
+                dataGridView1.Columns.Clear();
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = linhas;
+                dataGridView1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            AtualizarTela();
+        }
+
+        public static Image? ConverteByteArrayParaImagem(byte[] pData)
+        {
+            try
+            {
+                ImageConverter imgConverter = new();
+                return imgConverter.ConvertFrom(pData) as Image;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
+
+        public void AtualizaTelaEditar(int id)
+        {
+            //Instância e Preenche o objeto com os dados da view
+            var produto = new Produto
+            {
+                IdProduto = id,
+            };
+            try
+            {
+                // chama o método para buscar todos os dados da nossa camada model
+                DataTable linhas = dao.SelectDbProvider(produto);
+                // seta os dados na tela
+                foreach (DataRow row in linhas.Rows)
+                {
+                    textBox5.Text = row[0].ToString();
+                    textBox1.Text = row[1].ToString();
+                    textBox2.Text = row[2].ToString();
+                    textBox3.Text = row[3].ToString();
+                    pictureBoxImagem.Image = ClassFuncoes.ConverteByteArrayParaImagem((byte[])row[4]);
+                }
+                textBox1.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void dataGridViewDados_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                //pega a primeira coluna, que esta com o ID, da linha selecionada
+                DataGridViewRow selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex];
+                int id = Convert.ToInt32(selectedRow.Cells[0].Value);
+                AtualizaTelaEditar(id);
+            }
+        }
+
+
+
+
+
+        private void EditarDbProvider_Click(object sender, EventArgs e)
+        {
+            //Instância e Preenche o objeto com os dados da view
+            var produto = new Produto
+            {
+                IdProduto = int.Parse(textBox5.Text),
+                Nome = textBox1.Text,
+                Descricao = textBox3.Text,
+                ValorUnitario = textBox2.Text,
+                Foto = ClassFuncoes.ConverteImagemParaByteArray(pictureBoxImagem.Image),
+            };
+            try
+            {
+                // chama o método para inserir da nossa camada model
+                dao.EditarDbProvider(produto);
+                MessageBox.Show("Dados editados com sucesso!");
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //Instância e Preenche o objeto com os dados da view
+            var produto = new Produto
+            {
+                IdProduto = int.Parse(textBox1.Text),
+            };
+            try
+            {
+                // chama o método para inserir da nossa camada model
+                dao.ExcluirDbProvider(produto);
+                MessageBox.Show("Dados excluidos com sucesso!");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            AtualizarTela();
         }
     }
 }

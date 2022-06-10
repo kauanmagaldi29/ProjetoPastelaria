@@ -115,6 +115,37 @@ namespace ProjetoPastelaria
         }
 
 
+        public void AtualizaTelaEditar(int id)
+        {
+            //Instância e Preenche o objeto com os dados da view
+            var funcionario = new Funcionario
+            {
+                IdFuncionario = id,
+            };
+            try
+            {
+                // chama o método para buscar todos os dados da nossa camada model
+                DataTable linhas = dao.SelectDbProvider(funcionario);
+                // seta os dados na tela
+                foreach (DataRow row in linhas.Rows)
+                {
+                    textBox1.Text = row[0].ToString();
+                    textBox4.Text = row[1].ToString();
+                    textBox2.Text = row[2].ToString();
+                    textBox5.Text = row[3].ToString();
+                    textBox3.Text = row[5].ToString();
+
+
+                }
+                textBox2.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
 
         private void CadastroFuncionario_Load(object sender, EventArgs e)
         {
@@ -125,7 +156,41 @@ namespace ProjetoPastelaria
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Instância e Preenche o objeto com os dados da view
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("O campo ID é obrigatório!");
+                textBox1.Focus();
+                return;
+            }
+
+            if (textBox2.Text == "")
+            {
+                MessageBox.Show("O campo CPF é obrigatório!");
+                textBox2.Focus();
+                return;
+            }
+
+            if (textBox3.Text == "")
+            {
+                MessageBox.Show("O campo Matricula é obrigatório!");
+                textBox3.Focus();
+                return;
+            }
+
+            if (textBox6.Text == "")
+            {
+                MessageBox.Show("O campo Senha é obrigatório!");
+                textBox6.Focus();
+                return;
+            }
+
+            if (textBox7.Text == "")
+            {
+                MessageBox.Show("O campo Re-senha é obrigatório!");
+                textBox7.Focus();
+                return;
+            }
+
             var funcionario = new Funcionario
             {
                 IdFuncionario = 0,
@@ -146,8 +211,21 @@ namespace ProjetoPastelaria
             {
                 MessageBox.Show(ex.Message);
             }
+
             AtualizarTela();
         }
+
+        private void dataGridViewDados_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                //pega a primeira coluna, que esta com o ID, da linha selecionada
+                DataGridViewRow selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex];
+                int id = Convert.ToInt32(selectedRow.Cells[0].Value);
+                AtualizaTelaEditar(id);
+            }
+        }
+
 
         private void AtualizarTela()
         {
@@ -176,12 +254,59 @@ namespace ProjetoPastelaria
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-         
+        
         }
 
         private void Voltar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            //Instância e Preenche o objeto com os dados da view
+            var funcionario = new Funcionario
+            {
+                IdFuncionario = int.Parse(textBox1.Text),
+            };
+            try
+            {
+                // chama o método para inserir da nossa camada model
+                dao.ExcluirDbProvider(funcionario);
+                MessageBox.Show("Dados excluidos com sucesso!");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            AtualizarTela();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var funcionario = new Funcionario
+            {
+                IdFuncionario = int.Parse(textBox1.Text),
+                Nome = textBox4.Text,
+                Cpf = textBox2.Text,
+                Telefone = textBox5.Text,
+                Matricula = textBox3.Text,
+                Grupo = (radioButtonCadFunAdm.Checked) ? 1 : 2,
+
+            };
+            try
+            {
+                // chama o método para inserir da nossa camada model
+                dao.EditarDbProvider(funcionario);
+                MessageBox.Show("Dados editados com sucesso!");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            AtualizarTela();
         }
     }
 }

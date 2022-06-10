@@ -14,10 +14,6 @@ namespace ProjetoPastelaria
         {
            
 
-
-
-
-
             this.Hide();
             Menu menu = new();
             menu.FormClosed += (s, args) => 
