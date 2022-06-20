@@ -41,18 +41,6 @@ namespace ProjetoPastelaria
         private void Button1_Click_1(object sender, EventArgs e)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            //altera os valores de provider e da connectionStrings com nome BD
-            config.ConnectionStrings.ConnectionStrings["BD"].ProviderName = comboBoxProvider.Text;
-            config.ConnectionStrings.ConnectionStrings["BD"].ConnectionString = textBoxStringDeConexao.Text;
-            //salva as alterações
-            config.Save(ConfigurationSaveMode.Modified, true);
-            //recarrega os dados da seção especificada
-            ConfigurationManager.RefreshSection("connectionStrings");
-            //fecha a tela
-            Close();
-            //dispara msg para usuário
-            _ = MessageBox.Show("Dados alterados com sucesso!");
-
             config.AppSettings.Settings.Remove("IdiomaRegiao");
             config.AppSettings.Settings.Add("IdiomaRegiao", comboBoxLinguagem.Text);
             config.Save(ConfigurationSaveMode.Modified);
@@ -60,7 +48,7 @@ namespace ProjetoPastelaria
 
             Close();
 
-            _ = MessageBox.Show("Idioma alterada! reinicie a aplicação");
+            _ = MessageBox.Show("Idioma alterado com sucesso! reinicie a aplicação");
 
             if (checkBoxAlteraIdioma.Checked)
             {
@@ -110,5 +98,27 @@ namespace ProjetoPastelaria
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //abre o arquivo local como leitura/escrita - ControleEstoqueDoZe.exe.config
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //altera os valores de provider e da connectionStrings com nome BD
+            config.ConnectionStrings.ConnectionStrings["BD"].ProviderName = comboBoxProvider.Text;
+            config.ConnectionStrings.ConnectionStrings["BD"].ConnectionString = textBoxStringDeConexao.Text;
+            //salva as alterações
+            config.Save(ConfigurationSaveMode.Modified, true);
+            //recarrega os dados da seção especificada
+            ConfigurationManager.RefreshSection("connectionStrings");
+            //fecha a tela
+            Close();
+            //dispara msg para usuário
+            _ = MessageBox.Show("Dados alterados com sucesso!");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
-}
+ }
