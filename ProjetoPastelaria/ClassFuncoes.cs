@@ -4,12 +4,69 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using System.Resources;
+using System.Globalization;
+using System.ComponentModel;
+using System.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ProjetoPastelariaDoZe_2022.DAO;
+using System.Threading.Tasks;
+using System.Data.Common;
 
 namespace ProjetoPastelaria
 {
     internal class ClassFuncoes
     {
-        
+
+        public static DialogResult InputBox(string title, string promptText, ref string value)
+        {
+            Form form = new();
+            Label label = new();
+            TextBox textBox = new();
+            Button buttonOk = new();
+            Button buttonCancel = new();
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            form.ClientSize = new Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
+        }
+
+
+
+
+
         /// <summary>
         /// Altera a cor do BackGroud quando o campo ganha o foco
         /// </summary>
@@ -61,63 +118,33 @@ namespace ProjetoPastelaria
             }
         }
 
-        static string valor = "a"; // >> ?
-        private static void Aplica_KeyPress_Mascara(object sender, KeyPressEventArgs e)
+
+        public static void FormEventoKeyDown(object sender, KeyEventArgs e)
         {
-            TextBoxBase txt = (TextBoxBase)sender;
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back))
+            //obtém o form onde o componente gerou o evento
+            Control x = (Control)sender;
+            Form form = x.FindForm();
+            //verifica se foi pressionado ENTER
+            if (e.KeyCode == Keys.Enter)
             {
-                if (e.KeyChar == ',')
-                {
-                    e.Handled = (txt.Text.Contains(','));
-                }
-                else
-                {
-                    e.Handled = true;
-                }
+                //Obtém ou define um valor que indica se o evento de chave deve ser passado para o controle
+                //subjacente.
+                //true caso o evento chave não deva ser enviado ao controle; caso contrário, false
+                //com isso evitamos o som de erro toda vez que pressionamos enter em algum campo
+                e.SuppressKeyPress = true;
+                //SendKeys.Send("{TAB}");
+                form.SelectNextControl(form.ActiveControl, !e.Shift, true, true, true);
             }
+            //verifica se foi pressionado ESC
+            else if (e.KeyCode == Keys.Escape)
+            {
+
+                form.Close();
+
+            }
+
         }
-        private static void Aplica_Leave_Mascara(object sender, EventArgs e)
-        {
-            TextBoxBase txt = (TextBoxBase)sender;
-            valor = txt.Text.Replace("R$", "");
-            txt.Text = string.Format("{0:C}", Convert.ToDouble(valor));
-        }
-        private static void Aplica_KeyUp_Mascara(object sender, KeyEventArgs e)
-        {
-            TextBoxBase txt = (TextBoxBase)sender;
-            valor = txt.Text.Replace("R$", "").Replace(",", "").Replace(" ", "").Replace("00,", "");
-            if (valor.Length == 0)
-            {
-                txt.Text = "0,00" + valor;
-            }
-            else if (valor.Length == 1)
-            {
-                txt.Text = "0,0" + valor;
-            }
-            else if (valor.Length == 2)
-            {
-                txt.Text = "0," + valor;
-            }
-            else if (valor.Length >= 3)
-            {
-                if (txt.Text.StartsWith("0,"))
-                {
-                    txt.Text = valor.Insert(valor.Length - 2, ",").Replace("0,", "");
-                }
-                else if (txt.Text.Contains("00,"))
-                {
-                    txt.Text = valor.Insert(valor.Length - 2, ",").Replace("00,", "");
-                }
-                else
-                {
-                    txt.Text = valor.Insert(valor.Length - 2, ",");
-                }
-            }
-            valor = txt.Text;
-            txt.Text = string.Format("{0:C}", Convert.ToDouble(valor));
-            txt.Select(txt.Text.Length, 0);
-        }
+
 
 
         public static string Sha256Hash(string senha)

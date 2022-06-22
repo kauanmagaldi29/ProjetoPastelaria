@@ -340,7 +340,7 @@ namespace ProjetoPastelaria.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Pasteleixons.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a SOBRE O PROGRAMA.
         /// </summary>
         internal static string LabelSobreNome {
             get {
@@ -358,11 +358,20 @@ namespace ProjetoPastelaria.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Linkseixons.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a SAIBA MAIS SOBRE A EMPRESA.
         /// </summary>
         internal static string LinkLabelSobreLink {
             get {
                 return ResourceManager.GetString("LinkLabelSobreLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a LOGIN.
+        /// </summary>
+        internal static string pasteltitulo {
+            get {
+                return ResourceManager.GetString("pasteltitulo", resourceCulture);
             }
         }
     }

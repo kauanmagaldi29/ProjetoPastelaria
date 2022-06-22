@@ -1,14 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Configuration;
+using System.Resources;
+using System.Globalization;
+using System.ComponentModel;
+using System.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using ProjetoPastelariaDoZe_2022.DAO;
+using System.Threading.Tasks;
+using System.Data.Common;
 
 namespace ProjetoPastelaria
 {
@@ -16,7 +28,7 @@ namespace ProjetoPastelaria
     {
 
         private readonly ClienteDAO dao;
-        ///private int buttonVoltar_Click;
+       
 
         public CadastroCliente()
         {
@@ -52,13 +64,12 @@ namespace ProjetoPastelaria
             string strConnection = ConfigurationManager.ConnectionStrings["BD"].ConnectionString;
 
             dao = new ClienteDAO(provider, strConnection);
-           
 
         }
 
         private void ButtonSalvar_Click(object? sender, EventArgs e)
         {
-            this.Hide();
+           
         }
 
         private void ButtonVoltar_Click(object? sender, EventArgs e)
@@ -131,7 +142,7 @@ namespace ProjetoPastelaria
                 MessageBox.Show(ex.Message);
             }
 
-            AtualizarTela();
+            
         }
 
 
@@ -151,8 +162,8 @@ namespace ProjetoPastelaria
                 {
                     textBox3.Text = row[0].ToString();
                     textBox5.Text = row[1].ToString();
-                    maskedTextBox1.Text = row[2].ToString();
-                    maskedTextBox2.Text = row[3].ToString();
+                    textBox1.Text = row[2].ToString();
+                    textBox2.Text = row[3].ToString();
                     textBox7.Text = row[4].ToString();
                     numericUpDown1.Value = Convert.ToInt32(row[5].ToString());
                     comboBox1.Text = row[6].ToString();
@@ -189,13 +200,44 @@ namespace ProjetoPastelaria
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            if (textBox3.Text == "")
+            {
+                MessageBox.Show("O campo id é obrigatório!");
+                textBox3.Focus();
+                return;
+            }
+
+            if (textBox5.Text == "")
+            {
+                MessageBox.Show("O campo nome é obrigatório!");
+                textBox5.Focus();
+                return;
+            }
+
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("O campo cpf é obrigatório!");
+                textBox1.Focus();
+                return;
+            }
+
+            if (textBox7.Text == "")
+            {
+                MessageBox.Show("O campo senha é obrigatório!");
+                textBox7.Focus();
+                return;
+            }
+
+
+
             //Instância e Preenche o objeto com os dados da view
             var Cliente = new Cliente
             {
                 IdCliente = 0,
                 Nome = textBox5.Text,
-                Cpf = maskedTextBox1.Text,
-                Telefone = maskedTextBox2.Text,
+                Cpf = textBox1.Text,
+                Telefone = textBox2.Text,
                 Senha = ClassFuncoes.Sha256Hash(textBox7.Text)
                 
             };
@@ -209,23 +251,11 @@ namespace ProjetoPastelaria
             {
                 MessageBox.Show(ex.Message);
 
-
             }
-
             AtualizarTela();
+           
 
 
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridView1.SelectedCells.Count > 0)
-            {
-                //pega a primeira coluna, que esta com o ID, da linha selecionada
-                DataGridViewRow selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex];
-                int id = Convert.ToInt32(selectedRow.Cells[0].Value);
-                AtualizaTelaEditar(id);
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -234,9 +264,8 @@ namespace ProjetoPastelaria
             {
                 IdCliente = int.Parse(textBox3.Text),
                 Nome = textBox5.Text,
-                Cpf = maskedTextBox1.Text,
-                Telefone = maskedTextBox2.Text,
-                
+                Cpf = textBox1.Text,
+                Telefone = textBox2.Text,
                 Dia_fiado = numericUpDown1.Text,
 
             };
@@ -272,6 +301,53 @@ namespace ProjetoPastelaria
                 MessageBox.Show(ex.Message);
             }
             AtualizarTela();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+           
+
+            this.Hide();
+            Form f = new Menu();
+            f.FormClosed += (s, args) =>
+            this.Close();
+            f.Show();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                //pega a primeira coluna, que esta com o ID, da linha selecionada
+                DataGridViewRow selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex];
+                int id = Convert.ToInt32(selectedRow.Cells[0].Value);
+                AtualizaTelaEditar(id);
+            }
+        }
+
+        private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                //pega a primeira coluna, que esta com o ID, da linha selecionada
+                DataGridViewRow selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex];
+                int id = Convert.ToInt32(selectedRow.Cells[0].Value);
+                AtualizaTelaEditar(id);
+            }
+        }
+
+
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //pega a primeira coluna, que esta com o ID, da linha selecionada
+            DataGridViewRow selectedRow = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex];
+            int id = Convert.ToInt32(selectedRow.Cells[0].Value);
+            AtualizaTelaEditar(id);
         }
     }
 }

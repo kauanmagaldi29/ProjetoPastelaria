@@ -57,5 +57,10 @@ namespace ProjetoPastelaria
         {
 
         }
+
+        private void linkLabelSobreLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }

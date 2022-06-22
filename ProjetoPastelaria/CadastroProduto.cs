@@ -154,9 +154,24 @@ namespace ProjetoPastelaria
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("O campo id é obrigatório!");
+                textBox1.Focus();
+                return;
+            }
+
+            if (textBox5.Text == "")
+            {
+                MessageBox.Show("O campo nome é obrigatório!");
+                textBox5.Focus();
+                return;
+            }
+
             
-                //Instância e Preenche o objeto com os dados da view
-                var produto = new Produto
+            //Instância e Preenche o objeto com os dados da view
+            var produto = new Produto
                 {
                     IdProduto = 0,
                     Nome = textBox1.Text,
@@ -213,8 +228,6 @@ namespace ProjetoPastelaria
             {
                 MessageBox.Show(ex.Message);
             }
-
-            AtualizarTela();
         }
 
         public static Image? ConverteByteArrayParaImagem(byte[] pData)
@@ -324,6 +337,11 @@ namespace ProjetoPastelaria
                 MessageBox.Show(ex.Message);
             }
             AtualizarTela();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

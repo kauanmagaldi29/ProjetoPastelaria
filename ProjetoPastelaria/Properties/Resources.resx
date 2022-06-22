@@ -211,12 +211,15 @@
     <value>Usuario:</value>
   </data>
   <data name="LabelSobreNome" xml:space="preserve">
-    <value>Pasteleixons</value>
+    <value>SOBRE O PROGRAMA</value>
   </data>
   <data name="LabelSobreTexto" xml:space="preserve">
     <value>loren loren loren loren</value>
   </data>
   <data name="LinkLabelSobreLink" xml:space="preserve">
-    <value>Linkseixons</value>
+    <value>SAIBA MAIS SOBRE A EMPRESA</value>
+  </data>
+  <data name="pasteltitulo" xml:space="preserve">
+    <value>LOGIN</value>
   </data>
 </root>

@@ -248,8 +248,6 @@ namespace ProjetoPastelaria
             {
                 MessageBox.Show(ex.Message);
             }
-
-            AtualizarTela();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

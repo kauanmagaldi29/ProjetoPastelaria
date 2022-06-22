@@ -120,5 +120,15 @@ namespace ProjetoPastelaria
         {
             Application.Exit();
         }
+
+        private void Config_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
  }

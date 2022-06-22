@@ -12,14 +12,25 @@ namespace ProjetoPastelaria
 
         private void Button1_Click(object sender, EventArgs e)
         {
-           
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("O campo Usuário é obrigatório!");
+                textBox1.Focus();
+                return;
+            }
 
+            if (textBox2.Text == "")
+            {
+                MessageBox.Show("O campo Senha é obrigatório!");
+                textBox2.Focus();
+                return;
+            }
             this.Hide();
-            Menu menu = new();
-            menu.FormClosed += (s, args) => 
+            Form f = new Menu();
+            f.FormClosed += (s, args) =>
             this.Close();
-            menu.Show();
-            
+            f.Show();
+
         }
 
         private void TextBox1_Enter(object sender, EventArgs e)
@@ -68,6 +79,11 @@ namespace ProjetoPastelaria
         private void Login_Load(object sender, EventArgs e)
         {
          
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

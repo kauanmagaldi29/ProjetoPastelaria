@@ -117,3 +117,4 @@ C:\Users\kauan.rosa\Área de Trabalho\ProjetoPastelaria\ProjetoPastelaria\bin\De
 C:\Users\kauan.rosa\Área de Trabalho\ProjetoPastelaria\ProjetoPastelaria\bin\Debug\net6.0-windows\ZstdNet.dll
 C:\Users\kauan.rosa\Área de Trabalho\ProjetoPastelaria\ProjetoPastelaria\bin\Debug\net6.0-windows\ProjetoPastelariaDoZe_2022.DAO.dll
 C:\Users\kauan.rosa\Área de Trabalho\ProjetoPastelaria\ProjetoPastelaria\bin\Debug\net6.0-windows\ProjetoPastelariaDoZe_2022.DAO.pdb
+C:\Users\kauan.rosa\Área de Trabalho\ProjetoPastelaria\ProjetoPastelaria\obj\Debug\net6.0-windows\ProjetoPastelaria.Comandas.resources

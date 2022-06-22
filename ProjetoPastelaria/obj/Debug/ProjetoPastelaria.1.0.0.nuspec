@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ProjetoPastelaria</id>
+    <version>1.0.0</version>
+    <authors>ProjetoPastelaria</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0">
+        <dependency id="ProjetoPastelariaDoZe_2022.DAO" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="MySql.Data" version="8.0.29" exclude="Build,Analyzers" />
+        <dependency id="System.Data.SqlClient" version="4.8.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Users\kauan.rosa\Área de Trabalho\ProjetoPastelaria\ProjetoPastelaria\obj\Debug\net6.0-windows\en-US\ProjetoPastelaria.resources.dll" target="lib\net6.0-windows7.0\en-US\ProjetoPastelaria.resources.dll" />
+    <file src="C:\Users\kauan.rosa\Área de Trabalho\ProjetoPastelaria\ProjetoPastelaria\obj\Debug\net6.0-windows\es\ProjetoPastelaria.resources.dll" target="lib\net6.0-windows7.0\es\ProjetoPastelaria.resources.dll" />
+    <file src="C:\Users\kauan.rosa\Área de Trabalho\ProjetoPastelaria\ProjetoPastelaria\bin\Debug\net6.0-windows\ProjetoPastelaria.runtimeconfig.json" target="lib\net6.0-windows7.0\ProjetoPastelaria.runtimeconfig.json" />
+    <file src="C:\Users\kauan.rosa\Área de Trabalho\ProjetoPastelaria\ProjetoPastelaria\bin\Debug\net6.0-windows\ProjetoPastelaria.dll" target="lib\net6.0-windows7.0\ProjetoPastelaria.dll" />
+  </files>
+</package>
