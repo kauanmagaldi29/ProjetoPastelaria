@@ -77,7 +77,7 @@ namespace ProjetoPastelariaDoZe_2022.DAO
                 comando.Parameters.Add(statusComanda);
                 conexao.Open();
                 // antes de abrir a comanda validar se ela já não esta aberta
-                comando.CommandText = @"SELECT id_comanda FROM tb_comanda WHERE status_comanda = @statusComanda and comanda = @numeroComanda";
+                comando.CommandText = @"SELECT id_comanda FROM comanda WHERE status_comanda = @statusComanda and comanda = @numeroComanda";
                 DataTable qtdaComandas = new();
                 qtdaComandas.Load(comando.ExecuteReader());
                 if (qtdaComandas.Rows.Count > 0)
@@ -86,7 +86,7 @@ namespace ProjetoPastelariaDoZe_2022.DAO
                 }
                 else
                 {
-                    comando.CommandText = @"INSERT INTO tb_comanda(comanda, data_hora, status_comanda) VALUES (@numeroComanda, @dataHora, @statusComanda)";
+                    comando.CommandText = @"INSERT INTO comanda(comanda, data_hora, status_comanda) VALUES (@numeroComanda, @dataHora, @statusComanda)";
                     var linhas = comando.ExecuteNonQuery();
                     return true;
                 }
@@ -106,8 +106,8 @@ namespace ProjetoPastelariaDoZe_2022.DAO
                 comando.Parameters.Add(statusComanda);
                 conexao.Open();
                 comando.CommandText = @"" +
-                "SELECT id_comanda AS ID, comanda AS Comanda, data_hora AS Data, status_comanda AS Status " +
-                "FROM tb_comanda " +
+                "SELECT comanda AS ID, comanda AS Comanda, data_hora AS Data, status_comanda AS Status " +
+                "FROM comanda " +
                 "WHERE status_comanda = @statusComanda";
                 //Executa o script na conexão e retorna as linhas afetadas.
                 var sdr = comando.ExecuteReader();
@@ -145,7 +145,7 @@ namespace ProjetoPastelariaDoZe_2022.DAO
                 comando.Parameters.Add(idFuncionario);
                 conexao.Open();
                 comando.CommandText = @"" +
-                "INSERT INTO tb_comanda_produto(comanda_id, produto_id, quantidade, valor_unitario, funcionario_id) " +
+                "INSERT INTO comanda_produto(comanda_id, produto_id, quantidade, valor_unitario, funcionario_id) " +
                 "VALUES (@idComanda, @idProduto, @quantidade, @valorUnitario, @idFuncionario)";
                 //Executa o script na conexão e retorna o número de linhas afetadas.
                 var linhas = comando.ExecuteNonQuery();
@@ -164,8 +164,8 @@ namespace ProjetoPastelariaDoZe_2022.DAO
                 comando.Parameters.Add(idComanda);
                 conexao.Open();
                 comando.CommandText = @"" +
-                "SELECT cp.id_comanda_produto AS ID, p.nome AS Nome, cp.quantidade AS Quantidade, cp.valor_unitario AS Unitário, f.nome AS Funcionário " + "FROM tb_comanda_produto cp " + 
-                "INNER JOIN tb_produto p " + "ON cp.produto_id = p.id_produto " + "INNER JOIN tb_funcionario f ON cp.funcionario_id = f.id_funcionario " + "WHERE cp.comanda_id = @idComanda;";
+                "SELECT cp.id_comanda_produto AS ID, p.nome AS Nome, cp.quantidade AS Quantidade, cp.valor_unitario AS Unitário, f.nome AS Funcionário " + "FROM comanda_produto cp " + 
+                "INNER JOIN produto p " + "ON cp.produto_id = p.id_produto " + "INNER JOIN funcionario f ON cp.funcionario_id = f.id_funcionario " + "WHERE cp.comanda_id = @idComanda;";
                 //Executa o script na conexão e retorna as linhas afetadas.
                 var sdr = comando.ExecuteReader();
                 DataTable linhas = new();
@@ -195,11 +195,11 @@ namespace ProjetoPastelariaDoZe_2022.DAO
             conexao.Open();
             if (comandaProdutos.Quantidade == 0)
             {
-                comando.CommandText = @"DELETE FROM tb_comanda_produto WHERE id_comanda_produto = @idComandaProduto";
+                comando.CommandText = @"DELETE FROM comanda_produto WHERE comanda_produto = @idComandaProduto";
             }
             else
             {
-                comando.CommandText = @"UPDATE tb_comanda_produto SET quantidade = @quantidade, funcionario_id = @idFuncionario WHERE
+                comando.CommandText = @"UPDATE comanda_produto SET quantidade = @quantidade, funcionario_id = @idFuncionario WHERE
                 id_comanda_produto = @idComandaProduto";
             }
             //Executa o script na conexão e retorna o número de linhas afetadas.
