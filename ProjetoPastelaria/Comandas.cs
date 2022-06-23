@@ -44,6 +44,8 @@ namespace ProjetoPastelaria
 
             dao = new ComandaDAO(provider, strConnection);
             daoProduto = new ProdutoDAO(provider, strConnection);
+
+            AtualizaTelaAreaComanda();
         }
 
         private void Comanda_Load(object sender, EventArgs e)
@@ -159,11 +161,6 @@ namespace ProjetoPastelaria
             }
         }
 
-        private void dataGridViewItens_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void dataGridViewProdutos_DoubleClick(object sender, EventArgs e)
         {
             if (dataGridViewProdutos.SelectedCells.Count > 0)
@@ -222,6 +219,48 @@ namespace ProjetoPastelaria
         }
 
         private void dataGridViewItens_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (dataGridViewItens.SelectedCells.Count > 0)
+            {
+                //pega o ID e o NUMERO da comanda selecionada
+                DataGridViewRow selectedRowComanda = dataGridViewComandas.Rows[dataGridViewComandas.SelectedCells[0].RowIndex];
+                int idComanda = Convert.ToInt32(selectedRowComanda.Cells[0].Value);
+                int numeroComanda = Convert.ToInt32(selectedRowComanda.Cells[1].Value);
+                //pega o ID, NOME, QUANTIDADE e VALOR do produto selecionado
+                DataGridViewRow selectedRowComandaItens = dataGridViewItens.Rows[dataGridViewItens.SelectedCells[0].RowIndex];
+                int idComandaProduto = Convert.ToInt32(selectedRowComandaItens.Cells[0].Value);
+                string nomeProduto = Convert.ToString(selectedRowComandaItens.Cells[1].Value);
+                string qtdaProduto = Convert.ToString(selectedRowComandaItens.Cells[2].Value);
+                double valorProduto = Convert.ToDouble(selectedRowComandaItens.Cells[3].Value);
+                //abrir tela confirmação e também para indicar a quantidade
+                if (ClassFuncoes.InputBox("Editar " + nomeProduto + " na Comanda: " + numeroComanda, "Quantidade:", ref qtdaProduto) == DialogResult.OK)
+                {
+                    //Instância objeto
+                    var comandaProdutos = new ComandaProdutos
+                    {
+                        IdComandaProduto = idComandaProduto,
+                        Quantidade = Convert.ToInt32(qtdaProduto),
+                    };
+                    try
+                    {
+                        // chama o método para inseir da nossa camada model
+                        dao.EditaItemComanda(comandaProdutos);
+                        AtualizarTelaItensComanda(idComanda);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void dataGridViewComandas_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewItens_DoubleClick(object sender, EventArgs e)
         {
             if (dataGridViewItens.SelectedCells.Count > 0)
             {

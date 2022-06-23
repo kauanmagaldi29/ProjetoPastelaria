@@ -177,6 +177,7 @@
             this.dataGridViewComandas.Size = new System.Drawing.Size(396, 395);
             this.dataGridViewComandas.TabIndex = 10;
             this.dataGridViewComandas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            this.dataGridViewComandas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewComandas_MouseDoubleClick);
             // 
             // panel4
             // 
@@ -201,8 +202,8 @@
             this.dataGridViewItens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewItens.Size = new System.Drawing.Size(404, 402);
             this.dataGridViewItens.TabIndex = 11;
-            this.dataGridViewItens.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewItens_CellContentClick);
             this.dataGridViewItens.SelectionChanged += new System.EventHandler(this.dataGridViewItens_SelectionChanged);
+            this.dataGridViewItens.DoubleClick += new System.EventHandler(this.dataGridViewItens_DoubleClick);
             this.dataGridViewItens.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewItens_MouseDoubleClick);
             // 
             // label4
@@ -226,6 +227,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Comandas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Comanda";
             this.Load += new System.EventHandler(this.Comanda_Load);
             this.panel1.ResumeLayout(false);

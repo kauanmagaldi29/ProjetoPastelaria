@@ -151,6 +151,7 @@ namespace ProjetoPastelariaDoZe_2022.DAO
                 var linhas = comando.ExecuteNonQuery();
             }
 
+
             public DataTable ListaItensComanda(ComandaProdutos comandaProdutos)
             {
                 using var conexao = factory.CreateConnection(); //Cria conexão
